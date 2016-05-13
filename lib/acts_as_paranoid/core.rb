@@ -131,7 +131,7 @@ module ActsAsParanoid
       self.class.transaction do
         run_callbacks :recover do
           recover_dependent_associations(options[:recovery_window], options) if options[:recursive]
-
+          self.paranoid_value = nil
           self.update_column(self.class.paranoid_column, nil)
         end
       end
